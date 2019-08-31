@@ -3,6 +3,8 @@
 namespace Resera\ConsoleCommands;
 
 use Illuminate\Support\ServiceProvider;
+use Resera\ConsoleCommands\App\Console\Commands\GenerateBoilerplate;
+use Resera\ConsoleCommands\App\Console\Commands\GenerateSubsystem;
 
 class ConsoleCommandsServiceProvider extends ServiceProvider
 {
@@ -14,10 +16,12 @@ class ConsoleCommandsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->publishes([
-            __DIR__.'/app/Console/Commands/GenerateBoilerplate.php' => base_path('app/Console/Commands/GenerateBoilerplate.php'),
-            __DIR__.'/app/Console/Commands/GenerateSubsystem.php' => base_path('app/Console/Commands/GenerateSubsystem.php')
-        ], 'resera-console-commands');
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                GenerateBoilerplate::class,
+                GenerateSubsystem::class
+            ]);
+        }        
     }
 
     /**
