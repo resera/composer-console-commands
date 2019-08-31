@@ -4,12 +4,14 @@ Install package
 
 ```composer require resera/console-commands```
 
-**IF LARAVEL < 5.5** Add to config/app.php in **providers** array
+## Commands
 
-```Resera\ConsoleCommands\ConsoleCommandsServiceProvider::class```
+Generate boilerplate code
 
-Publish command files
+```php artisan generate:boilerplate```
 
-```php artisan vendor:publish --tag=resera-console-commands```
+Generate subsystem folders
+
+```php artisan generate:subsystem {name}```
 
 
