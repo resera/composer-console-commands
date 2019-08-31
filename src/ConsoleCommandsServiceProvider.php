@@ -1,6 +1,6 @@
 <?php
 
-namespace Buzz\LaravelGoogleCaptcha;
+namespace Resera\ConsoleCommands;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -15,8 +15,9 @@ class ConsoleCommandsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/app/Console/Commands' => base_path('app/Console/Commands'),
-        ]);
+            __DIR__.'/app/Console/Commands/GenerateBoilerplate.php' => base_path('app/Console/Commands/GenerateBoilerplate.php'),
+            __DIR__.'/app/Console/Commands/GenerateSubsystem.php' => base_path('app/Console/Commands/GenerateSubsystem.php')
+        ], 'resera-console-commands');
     }
 
     /**
