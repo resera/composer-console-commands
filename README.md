@@ -4,7 +4,7 @@ Install package
 
 ```composer require resera/console-commands```
 
-Add to config/app.php in **providers** array
+**IF LARAVEL < 5.5** Add to config/app.php in **providers** array
 
 ```Resera\ConsoleCommands\ConsoleCommandsServiceProvider::class```
 
