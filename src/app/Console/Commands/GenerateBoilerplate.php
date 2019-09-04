@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Resera\ConsoleCommands\App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -53,6 +53,7 @@ class GenerateBoilerplate extends Command
 
         $this->createDir('app/Model');
             $this->createDir('app/Model/Contracts');
+                $this->createDir('app/Model/Contracts/AbstractClasses');
                 $this->createDir('app/Model/Contracts/Interfaces');
                     $this->createDir('app/Model/Contracts/Interfaces/Data');
                     $this->createDir('app/Model/Contracts/Interfaces/Formatters');
@@ -62,6 +63,7 @@ class GenerateBoilerplate extends Command
                 $this->createDir('app/Model/Data/Models');
                 $this->createDir('app/Model/Data/Repositories');
             $this->createDir('app/Model/Events');
+            $this->createDir('app/Model/Listeners');
             $this->createDir('app/Model/Facades');
             $this->createDir('app/Model/Formatters');
             $this->createDir('app/Model/Observers');
@@ -71,8 +73,10 @@ class GenerateBoilerplate extends Command
                 $this->createDir('app/Model/Providers/Formatters');
                 $this->createDir('app/Model/Providers/Services');
                 $this->createDir('app/Model/Providers/Validators');
+                $this->createDir('app/Model/Providers/ViewComposers');
             $this->createDir('app/Model/Services');                
             $this->createDir('app/Model/Validators');                
+            $this->createDir('app/Model/ViewComposers');                
 
         $this->createDir('resources/views/pages');
 

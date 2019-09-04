@@ -8,12 +8,12 @@ use Resera\ConsoleCommands\App\Console\Commands\GenerateSubsystem;
 
 class ConsoleCommandsServiceProvider extends ServiceProvider
 {
-
-    /**
+ 
+    /**  
      * Bootstrap the application services.
-     *
+     * 
      * @return void
-     */
+     */ 
     public function boot()
     {
         if ($this->app->runningInConsole()) {

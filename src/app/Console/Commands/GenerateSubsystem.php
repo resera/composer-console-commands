@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Resera\ConsoleCommands\App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
@@ -62,13 +62,18 @@ class GenerateSubsystem extends Command
         $this->createDir('app/Model/Contracts/Interfaces/Validators/'.$this->argument('name'));
         $this->createDir('app/Model/Contracts/Interfaces/Services/'.$this->argument('name'));
         $this->createDir('app/Model/Formatters/'.$this->argument('name'));
+        $this->createDir('app/Model/Events/'.$this->argument('name'));
+        $this->createDir('app/Model/Listeners/'.$this->argument('name'));
         $this->createDir('app/Model/Services/'.$this->argument('name'));
         $this->createDir('app/Model/Validators/'.$this->argument('name'));
         $this->createDir('app/Model/Providers/Formatters/'.$this->argument('name'));
         $this->createDir('app/Model/Providers/Services/'.$this->argument('name'));
         $this->createDir('app/Model/Providers/Validators/'.$this->argument('name'));
+        $this->createDir('app/Model/Providers/ViewComposers/'.$this->argument('name'));
         $this->createDir('app/Http/Controllers/'.$this->argument('name'));
         $this->createDir('app/Http/Middleware/'.$this->argument('name'));
+        $this->createDir('resources/views/pages/'.$this->argument('name'));
+        $this->createDir('resources/lang/en/'.$this->argument('name'));
 
     }
 
