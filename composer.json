@@ -1,19 +1,20 @@
 {
-    "name": "resera/console-commands",
-    "description": "Console commands for new laravel projects",
-    "type": "library",
-    "homepage": "https://github.com/resera/composer-console-commands",
-    "authors": [
-        {
-            "name": "MB Resera",
-            "email": "admin@resera.lt"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {},
-    "autoload": {
-        "psr-4": {
-            "Resera\\ConsoleCommands\\": "src"
-        }
-    }
-}
+  "name": "resera/console-commands",
+  "description": "Console commands for new laravel projects",
+  "type": "library",
+  "homepage": "https://github.com/resera/composer-console-commands",
+  "license": "MIT",
+  "authors": [
+      {
+          "name": "MB Resera",
+          "email": "admin@resera.lt"
+      }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "autoload": {
+      "psr-4": {  
+          "Resera\\ConsoleCommands\\": "src"
+      }
+  }
+} 
