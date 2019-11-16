@@ -44,7 +44,7 @@ class GenerateBoilerplate extends Command
 
         $this->createDirectories();
 
-        $this->printGreenText("Boilerplate code generated successfully! \n");
+        $this->printGreenText("Boilerplate code generated successfully!");
 
     }
 
@@ -87,12 +87,12 @@ class GenerateBoilerplate extends Command
 
         $targetPath = $this->absPath . $path;
 
-        $this->printWhiteText("Creating " . $targetPath . "... \n");
+        $this->printWhiteText("Creating " . $targetPath . "...");
 
         if(file_exists($targetPath))
         {
 
-            $this->printRedText($targetPath . " already exists. \n");
+            $this->printRedText($targetPath . " already exists.");
             return;
 
         }

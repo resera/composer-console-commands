@@ -20,16 +20,23 @@ class ConsoleCommandsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->app->runningInConsole()) {
+
+        if($this->app->runningInConsole()) {
+
             $this->commands([
+
                 GenerateBoilerplate::class,
                 GenerateSubsystem::class,
                 GenerateFormatter::class,
                 GenerateService::class,
                 GenerateValidator::class,
-                GenerateResource::class
+                GenerateResource::class,
+                GenerateVueComponent::class,
+
             ]);
-        }        
+
+        }
+
     }
 
     /**
@@ -39,6 +46,8 @@ class ConsoleCommandsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
+
 
     }
 
