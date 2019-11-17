@@ -9,6 +9,7 @@ use Resera\ConsoleCommands\App\Console\Commands\GenerateService;
 use Resera\ConsoleCommands\App\Console\Commands\GenerateFormatter;
 use Resera\ConsoleCommands\App\Console\Commands\GenerateValidator;
 use Resera\ConsoleCommands\App\Console\Commands\GenerateResource;
+use Resera\ConsoleCommands\App\Console\Commands\GenerateVueComponent;
 
 class ConsoleCommandsServiceProvider extends ServiceProvider
 {
