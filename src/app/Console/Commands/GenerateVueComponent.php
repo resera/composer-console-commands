@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Symfony\Component\Process\Process;
 
-class GenerateBoilerplate extends Command
+class GenerateVueComponent extends Command
 {
 
     protected $TRANSLATION_TEMPLATE = "<i18n src='../../../../assets/%1\$s/translations/%2\$s.json'></i18n>\n\n";
