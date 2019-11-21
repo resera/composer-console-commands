@@ -301,32 +301,6 @@ class GenerateBoilerplate extends Command
         }      
 
     }  
-    
-    private function createFormatterInterface()
-    {
-
-        $FORMATTER_INTERFACE_TEMPLATE = "<?php\n\nnamespace App\Model\Contracts\Interfaces\AbstractClasses;\n\ninterface FormatterInterface\n{\n\n    public function prepareForFailedResponse(\$errors);\n\n    public function prepareForSuccessfulResponse(\$message);\n\n    public function prepareForDisplay(\$items);\n\n}";
-
-        $formatterInterfaceClass = $this->absPath . 'app/Model/Contracts/Interfaces/AbstractClasses/FormatterInterface.php';
-
-        $this->printWhiteText("Creating FormatterInterface.php... ");
-
-        if(!file_exists($formatterInterfaceClass)) {
-            $creation = new Process('touch '.$formatterInterfaceClass);
-            $creation->run();
-            $this->printGreenText("FormatterInterface created!");
-            $this->printWhiteText("FormatterInterface filling with template... ");
-            if (!($fp = fopen($formatterInterfaceClass, 'w'))) {
-                $this->printRedText("Cannot open FormatterInterface for writing");
-                return;
-            }
-            fprintf($fp, $FORMATTER_INTERFACE_TEMPLATE);
-            $this->printGreenText("FormatterInterface filled with template");
-        }else{
-            $this->printRedText("FormatterInterface already exists");
-        }      
-
-    }          
 
     private function createDir($path)
     {
