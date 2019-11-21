@@ -24,7 +24,7 @@ class GenerateService extends Command
     protected $description = 'Generates services';
 
     protected $SERVICE_INTERFACE_TEMPLATE = "<?php\n\nnamespace App\Model\Contracts\Interfaces\Services\%1\$s;\n\ninterface %2\$sServiceInterface\n{\n}";
-    protected $SERVICE_TEMPLATE = "<?php\n\nnamespace App\Model\Services\%1\$s;\n\nuse App\Model\Contracts\Interfaces\Services\%1\$s\%2\$sServiceInterface;\n\nclass %2\$sService implements %2\$sServiceInterface\n{\n}";
+    protected $SERVICE_TEMPLATE = "<?php\n\nnamespace App\Model\Services\%1\$s;\n\nuse App\Model\Contracts\AbstractClasses\Service;\nuse App\Model\Contracts\Interfaces\Services\%1\$s\%2\$sServiceInterface;\n\nclass %2\$sService extends Service implements %2\$sServiceInterface\n{\n\n    public function __construct()\n    {\n\n        \$this->generateResources(__NAMESPACE__);\n\n    }\n\n}";
     protected $SERVICE_PROVIDER_TEMPLATE = "<?php\n\nnamespace App\Model\Providers\Services\%1\$s;\n\nuse Illuminate\Support\ServiceProvider;\n\nclass %2\$sServiceProvider extends ServiceProvider{\n\n\tpublic function boot(){}\n\n\tpublic function register()\n\t{\n\t\t\$this->app->bind('App\Model\Contracts\Interfaces\Services\%1\$s\%2\$sServiceInterface', 'App\Model\Services\%1\$s\%2\$sService');\n\t}\n}";
 
     /**
@@ -49,7 +49,26 @@ class GenerateService extends Command
         $this->createServiceInterface();  
         $this->createService();            
         $this->createServiceProvider();      
+
+        $this->updateConfigApp();
+        system('composer dump-autoload');
         echo "Add provider to config/app.php to make it work.\n";         
+    }
+
+    private function updateConfigApp()
+    {
+
+        //read the entire string
+        $str=file_get_contents($this->absPath . 'config/app.php');
+
+        $name = "App\\Model\\Providers\\Services\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "ServiceProvider::class";
+
+        //replace something in the file string - this is a VERY simple example
+        $str=str_replace("/* SERVICES */", "/* SERVICES */\n".$name, $str);
+
+        //write the entire string
+        file_put_contents($this->absPath . 'config/app.php', $str);
+
     }
 
     public function createServiceInterface()

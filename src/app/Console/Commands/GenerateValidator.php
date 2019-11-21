@@ -39,8 +39,27 @@ class GenerateValidator extends Command
         $this->absPath = env('PATH_TO_PUBLIC');
         $this->createValidatorInterface();  
         $this->createValidator();            
-        $this->createValidatorProvider();      
+        $this->createValidatorProvider();
+        
+        $this->updateConfigApp();
+        system('composer dump-autoload');
         echo "Add provider to config/app.php to make it work.\n";         
+    }
+
+    private function updateConfigApp()
+    {
+
+        //read the entire string
+        $str=file_get_contents($this->absPath . 'config/app.php');
+
+        $name = "App\\Model\\Providers\\Validators\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "ValidatorProvider::class";
+
+        //replace something in the file string - this is a VERY simple example
+        $str=str_replace("/* VALIDATORS */", "/* VALIDATORS */\n".$name, $str);
+
+        //write the entire string
+        file_put_contents($this->absPath . 'config/app.php', $str);
+
     }
 
     public function createValidatorInterface()

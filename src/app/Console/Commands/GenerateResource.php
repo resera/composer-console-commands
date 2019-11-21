@@ -24,7 +24,7 @@ class GenerateResource extends Command
     protected $description = 'Generates all classes.';
 
     protected $REPOSITORY_INTERFACE_TEMPLATE = "<?php\n\nnamespace App\Model\Contracts\Interfaces\Data;\n\ninterface %sRepositoryInterface\n{\n}";
-    protected $REPOSITORY_TEMPLATE = "<?php\n\nnamespace App\Model\Data\Repositories;\n\nuse App\Model\Contracts\AbstractClasses\Repository;\nuse App\Model\Contracts\Interfaces\Data\%1\$sRepositoryInterface;\nuse App\Model\Data\Models\%1\$s;\n\nclass %1\$sRepository extends Repository implements %1\$sRepositoryInterface\n{\n}";
+    protected $REPOSITORY_TEMPLATE = "<?php\n\nnamespace App\Model\Data\Repositories;\n\nuse App\Model\Contracts\AbstractClasses\Repository;\nuse App\Model\Contracts\Interfaces\Data\%1\$sRepositoryInterface;\nuse App\Model\Data\Models\%1\$s;\n\nclass %1\$sRepository extends Repository implements %1\$sRepositoryInterface\n{\n\nprotected \$modelInstance = %1\$s::class;\n\n}";
     protected $REPOSITORY_PROVIDER_TEMPLATE = "<?php\n\nnamespace App\Model\Providers\Data;\n\nuse Illuminate\Support\ServiceProvider;\n\nclass %1\$sRepositoryProvider extends ServiceProvider{\n\n\tpublic function boot(){}\n\n\tpublic function register()\n\t{\n\t\t\$this->app->bind('App\Model\Contracts\Interfaces\Data\%1\$sRepositoryInterface', 'App\Model\Data\Repositories\%1\$sRepository');\n\t}\n}";
     protected $MODEL_TEMPLATE = "<?php\n\nnamespace App\Model\Data\Models;\n\nuse Illuminate\Database\Eloquent\Model;\n\nclass %1\$s extends Model{\n\n\tprotected \$guarded = ['id'];\n\tprotected \$table = '%2\$s';\n\n}";
 
@@ -53,7 +53,26 @@ class GenerateResource extends Command
         $this->createRepositoryInterface();  
         $this->createRepository();            
         $this->createRepositoryProvider();      
+
+        $this->updateConfigApp();
+        system('composer dump-autoload');
         echo "Add provider to config/app.php to make it work.\n";    
+
+    }
+
+    private function updateConfigApp()
+    {
+
+        //read the entire string
+        $str=file_get_contents($this->absPath . 'config/app.php');
+
+        $name = "App\\Model\\Providers\\Data\\" . $this->argument('name') . "RepositoryProvider::class";
+
+        //replace something in the file string - this is a VERY simple example
+        $str=str_replace("/* REPOSITORIES */", "/* REPOSITORIES */\n".$name, $str);
+
+        //write the entire string
+        file_put_contents($this->absPath . 'config/app.php', $str);
 
     }
 

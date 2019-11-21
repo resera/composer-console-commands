@@ -16,6 +16,8 @@ class GenerateFormatter extends Command
     protected $signature = 'generate:formatter {name} {--subsystem=}';
     protected $absPath;
 
+    private $formatterProvider;
+
     /**
      * The console command description.
      *
@@ -24,7 +26,7 @@ class GenerateFormatter extends Command
     protected $description = 'Command description';
 
     protected $FORMATTER_INTERFACE_TEMPLATE = "<?php\n\nnamespace App\Model\Contracts\Interfaces\Formatters\%1\$s;\n\ninterface %2\$sFormatterInterface\n{\n}";
-    protected $FORMATTER_TEMPLATE = "<?php\n\nnamespace App\Model\Formatters\%1\$s;\n\nuse App\Model\Contracts\Interfaces\Formatters\%1\$s\%2\$sFormatterInterface;\n\nclass %2\$sFormatter implements %2\$sFormatterInterface\n{\n}";
+    protected $FORMATTER_TEMPLATE = "<?php\n\nnamespace App\Model\Formatters\%1\$s;\n\nuse App\Model\Contracts\AbstractClasses\Formatter;\nuse App\Model\Contracts\Interfaces\Formatters\%1\$s\%2\$sFormatterInterface;\n\nclass %2\$sFormatter extends Formatter implements %2\$sFormatterInterface\n{\n\n\t/**\n     * Prepares single item for display.\n     *\n     * @param App\Model\Data\Models\ \$item\n     * @return array\n     */\n    protected function prepareItemForDisplay(\$item){}\n\n}";
     protected $FORMATTER_PROVIDER_TEMPLATE = "<?php\n\nnamespace App\Model\Providers\Formatters\%1\$s;\n\nuse Illuminate\Support\ServiceProvider;\n\nclass %2\$sFormatterProvider extends ServiceProvider{\n\n\tpublic function boot(){}\n\n\tpublic function register()\n\t{\n\t\t\$this->app->bind('App\Model\Contracts\Interfaces\Formatters\%1\$s\%2\$sFormatterInterface', 'App\Model\Formatters\%1\$s\%2\$sFormatter');\n\t}\n}";
     
 
@@ -40,7 +42,21 @@ class GenerateFormatter extends Command
         $this->createFormatterInterface();  
         $this->createFormatter();            
         $this->createFormatterProvider();      
+
+        $this->updateConfigApp();
+        system('composer dump-autoload');
         echo "Add provider to config/app.php to make it work.\n";         
+    }
+
+    private function updateConfigApp()
+    {
+
+        $str=file_get_contents($this->absPath . 'config/app.php');
+        $name = "App\\Model\\Providers\\Formatters\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "FormatterProvider::class";
+        $str=str_replace("/* FORMATTERS */", "/* FORMATTERS */\n".$name, $str);
+
+        file_put_contents($this->absPath . 'config/app.php', $str);
+
     }
 
     public function createFormatterInterface()
@@ -99,6 +115,7 @@ class GenerateFormatter extends Command
         $subsystemName = $this->option('subsystem');
         $filename = $this->argument('name') . 'FormatterProvider.php';
         $formatterProvider = $this->absPath . 'app/Model/Providers/Formatters/'. $subsystemName . '/' . $filename;
+        $this->formatterProvider = $formatterProvider;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($formatterProvider)) {
             $creation = new Process('touch '.$formatterProvider);
