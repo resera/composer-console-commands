@@ -52,7 +52,7 @@ class GenerateFormatter extends Command
     {
 
         $str=file_get_contents($this->absPath . 'config/app.php');
-        $name = "App\\Model\\Providers\\Formatters\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "FormatterProvider::class";
+        $name = "App\\Model\\Providers\\Formatters\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "FormatterProvider::class,";
         $str=str_replace("/* FORMATTERS */", "/* FORMATTERS */\n".$name, $str);
 
         file_put_contents($this->absPath . 'config/app.php', $str);

@@ -66,7 +66,7 @@ class GenerateResource extends Command
         //read the entire string
         $str=file_get_contents($this->absPath . 'config/app.php');
 
-        $name = "App\\Model\\Providers\\Data\\" . $this->argument('name') . "RepositoryProvider::class";
+        $name = "App\\Model\\Providers\\Data\\" . $this->argument('name') . "RepositoryProvider::class,";
 
         //replace something in the file string - this is a VERY simple example
         $str=str_replace("/* REPOSITORIES */", "/* REPOSITORIES */\n".$name, $str);

@@ -61,7 +61,7 @@ class GenerateService extends Command
         //read the entire string
         $str=file_get_contents($this->absPath . 'config/app.php');
 
-        $name = "App\\Model\\Providers\\Services\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "ServiceProvider::class";
+        $name = "App\\Model\\Providers\\Services\\" . $this->option('subsystem') . "\\" . $this->argument('name') . "ServiceProvider::class,";
 
         //replace something in the file string - this is a VERY simple example
         $str=str_replace("/* SERVICES */", "/* SERVICES */\n".$name, $str);
