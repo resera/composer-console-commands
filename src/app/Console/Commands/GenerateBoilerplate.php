@@ -80,6 +80,35 @@ class GenerateBoilerplate extends Command
 
         $this->createDir('resources/views/pages');
 
+        $this->createAbstractClasses();
+
+    }
+
+    private function createAbstractClasses()
+    {
+
+        $REPOSITORY_TEMPLATE = "<?php\n\nnamespace App\Model\Contracts\AbstractClasses;\n\nuse App\Model\Contracts\Interfaces\AbstractClasses\RepositoryInterface;\n\nclass Repository implements RepositoryInterface\n{\n\n    protected \$model;\n    protected \$modelInstance;\n\n    public function __construct() \n\t{\n\n        \$this->makeModel();\n        \n    }\n    \n    public function model()\n    {\n\n        return \$this->modelInstance;\n\n    }\n    \n\t/**\n\t * Makes model.\n     * \n\t * @return Illuminate\Database\Eloquent\Model\n\t */\n\tpublic function makeModel() \n\t{\n\n        \$model = \App::make(\$this->model());\n        \n        return \$this->model = \$model->newQuery();\n        \n    }\n    \n    /**\n     * Creates new item.\n     *\n     * @param array \$args\n     * @return Illuminate\Database\Eloquent\Model\n     */\n    public function create(\$args)\n    {\n\n        \$instance = new \$this->modelInstance;\n        \$instance->fill(\$args);\n        \$instance->save();\n\n        return \$instance;\n\n    }\n\n    /**\n     * Gets item by an ID.\n     *\n     * @param integer \$id\n     * @return Illuminate\Database\Eloquent\Model\n     */\n    public function get(\$id)\n    {\n\n        return \$this->makeModel()->findOrFail(\$id);\n\n    }\n\n    /**\n     * Deletes given item.\n     *\n     * @param integer \$id\n     * @return void\n     */\n    public function delete(\$id)\n    {\n\n        \$this->makeModel()->delete(\$id);\n\n    }\n\n    /**\n     * Updates given item.\n     *\n     * @param integer \$id\n     * @param array \$args\n     * @return boolean\n     */\n    public function update(\$id, \$args)\n    {\n\n        \$model = \$this->makeModel()->findOrFail(\$id);\n        \n        if(\$model)\n        {\n\n            \$model->update(\$args);\n            return true;\n\n        }\n\n        return false;\n\n    }\n\n}";
+
+        $repositoryClass = $this->absPath . 'app/Model/Contracts/AbstractClasses/Repository.php';
+
+        $this->printWhiteText("Creating Repository.php... ");
+
+        if(!file_exists($repositoryClass)) {
+            $creation = new Process('touch '.$repositoryClass);
+            $creation->run();
+            $this->printGreenText("Repository created!");
+            $this->printWhiteText("Repository filling with template... ");
+            if (!($fp = fopen($repositoryClass, 'w'))) {
+                $this->printRedText("Cannot open Repository for writing");
+                return;
+            }
+            fprintf($fp, $REPOSITORY_TEMPLATE);
+            $this->printGreenText("Repository filled with template");
+        }else{
+            $this->printRedText("Repository already exists");
+        }        
+
+
     }
 
     private function createDir($path)
