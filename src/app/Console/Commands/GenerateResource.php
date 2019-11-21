@@ -56,7 +56,6 @@ class GenerateResource extends Command
 
         $this->updateConfigApp();
         system('composer dump-autoload');
-        echo "Add provider to config/app.php to make it work.\n";    
 
     }
 
