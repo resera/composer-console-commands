@@ -4,6 +4,12 @@ Install package
 
 ```composer require resera/console-commands```
 
+Add Provider in app.php
+
+```Resera\ConsoleCommands\ConsoleCommandsServiceProvider::class,```
+
+
+
 ## Commands
 
 Generate boilerplate code
@@ -16,7 +22,7 @@ Generate subsystem folders
 
 Generate resource (Model + Repository + migration + seeder)
 
-```php artisan generate:resource --table={tableName}```
+```php artisan generate:resource {name} --table={tableName}```
 
 Generate service
 
