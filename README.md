@@ -26,12 +26,12 @@ Generate resource (Model + Repository + migration + seeder)
 
 Generate service
 
-```php artisan generate:service --subsystem={subsystem}```
+```php artisan generate:service {name} --subsystem={subsystem}```
 
 Generate formatter
 
-```php artisan generate:formatter --subsystem={subsystem}```
+```php artisan generate:formatter {name} --subsystem={subsystem}```
 
 Generate validator
 
-```php artisan generate:validator --subsystem={subsystem}```
+```php artisan generate:validator {name} --subsystem={subsystem}```
