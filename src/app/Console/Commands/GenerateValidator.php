@@ -24,7 +24,7 @@ class GenerateValidator extends Command
     protected $description = 'Command description';
 
     protected $VALIDATOR_INTERFACE_TEMPLATE = "<?php\n\nnamespace App\Model\Contracts\Interfaces\Validators\%1\$s;\n\ninterface %2\$sValidatorInterface\n{\n}";
-    protected $VALIDATOR_TEMPLATE = "<?php\n\nnamespace App\Model\Validators\%1\$s;\n\nuse App\Model\Contracts\Interfaces\Validators\%1\$s\%2\$sValidatorInterface;\n\nclass %2\$sValidator implements %2\$sValidatorInterface\n{\n}";
+    protected $VALIDATOR_TEMPLATE = "<?php\n\nnamespace App\Model\Validators\%1\$s;\n\nuse App\Model\Contracts\AbstractClasses\Validator as BaseValidator;\nuse Illuminate\Support\Facades\Validator;\nuse App\Model\Contracts\Interfaces\Validators\%1\$s\%2\$sValidatorInterface;\n\nclass %2\$sValidator extends BaseValidator implements %2\$sValidatorInterface\n{\n}";
     protected $VALIDATOR_PROVIDER_TEMPLATE = "<?php\n\nnamespace App\Model\Providers\Validators\%1\$s;\n\nuse Illuminate\Support\ServiceProvider;\n\nclass %2\$sValidatorProvider extends ServiceProvider{\n\n\tpublic function boot(){}\n\n\tpublic function register()\n\t{\n\t\t\$this->app->bind('App\Model\Contracts\Interfaces\Validators\%1\$s\%2\$sValidatorInterface', 'App\Model\Validators\%1\$s\%2\$sValidator');\n\t}\n}";
     
 
