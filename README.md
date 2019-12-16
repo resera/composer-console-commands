@@ -35,3 +35,7 @@ Generate formatter
 Generate validator
 
 ```php artisan generate:validator {name} --subsystem={subsystem}```
+
+Generate facade
+
+```php artisan generate:facade {name}```

@@ -94,7 +94,7 @@ class GenerateBoilerplate extends Command
         $str=file_get_contents($this->absPath . 'config/app.php');
 
         //replace something in the file string - this is a VERY simple example
-        $str=str_replace("App\Providers\RouteServiceProvider::class,", "App\Providers\RouteServiceProvider::class,\n\n/* REPOSITORIES */\n\n/* FORMATTERS */\n\n/* SERVICES */\n\n/* VALIDATORS */\n\n",$str);
+        $str=str_replace("App\Providers\RouteServiceProvider::class,", "App\Providers\RouteServiceProvider::class,\n\n/* REPOSITORIES */\n\n/* FORMATTERS */\n\n/* FACADES */\n\n/* SERVICES */\n\n/* VALIDATORS */\n\n",$str);
 
         //write the entire string
         file_put_contents($this->absPath . 'config/app.php', $str);
