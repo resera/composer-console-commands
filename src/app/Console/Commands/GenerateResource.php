@@ -83,7 +83,7 @@ class GenerateResource extends Command
         $modelFile = $this->absPath . 'app/Model/Data/Models/'. $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($modelFile)) {
-            $creation = new Process('touch '.$modelFile);
+            $creation = new Process(['touch', $modelFile]);
             $creation->run();            
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -109,7 +109,7 @@ class GenerateResource extends Command
         $this->printWhiteText("Creating " .$filename."... ");
 
         if(!file_exists($repositoryInterface)) {
-            $creation = new Process('touch '.$repositoryInterface);
+            $creation = new Process(['touch', $repositoryInterface]);
             $creation->run();
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -132,7 +132,7 @@ class GenerateResource extends Command
         $repository = $this->absPath . 'app/Model/Data/Repositories/'. $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($repository)) {
-            $creation = new Process('touch '.$repository);
+            $creation = new Process(['touch', $repository]);
             $creation->run();           
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -155,7 +155,7 @@ class GenerateResource extends Command
         $repositoryProvider = $this->absPath . 'app/Model/Providers/Data/'. $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($repositoryProvider)) {
-            $creation = new Process('touch '.$repositoryProvider);
+            $creation = new Process(['touch', $repositoryProvider]);
             $creation->run();             
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");

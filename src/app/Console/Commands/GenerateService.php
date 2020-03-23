@@ -80,7 +80,7 @@ class GenerateService extends Command
         $this->printWhiteText("Creating " .$filename."... ");
 
         if(!file_exists($serviceInterface)) {
-            $creation = new Process('touch '.$serviceInterface);
+            $creation = new Process(['touch', $serviceInterface]);
             $creation->run();
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -104,7 +104,7 @@ class GenerateService extends Command
         $service = $this->absPath . 'app/Model/Services/'. $subsystemName . '/' . $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($service)) {
-            $creation = new Process('touch '.$service);
+            $creation = new Process(['touch', $service]);
             $creation->run();           
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -128,7 +128,7 @@ class GenerateService extends Command
         $serviceProvider = $this->absPath . 'app/Model/Providers/Services/'. $subsystemName . '/' . $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($serviceProvider)) {
-            $creation = new Process('touch '.$serviceProvider);
+            $creation = new Process(['touch', $serviceProvider]);
             $creation->run();             
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");

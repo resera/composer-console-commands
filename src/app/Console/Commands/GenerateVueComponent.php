@@ -67,7 +67,7 @@ class GenerateVueComponent extends Command
         if(!file_exists($componentFile)) {
 
             $this->createDir($componentFileFolder);
-            $creation = new Process('touch ' . $componentFile);
+            $creation = new Process(['touch', $componentFile]);
             $creation->run();
             $this->printGreenText($name . " created!");
             $this->printWhiteText($name . " filling with template...");
@@ -109,7 +109,7 @@ class GenerateVueComponent extends Command
 
         }
 
-        $creation = new Process('mkdir ' . $targetPath);
+        $creation = new Process(['mkdir', $targetPath]);
         $creation->run(); 
 
     }

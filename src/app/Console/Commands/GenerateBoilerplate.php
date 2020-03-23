@@ -130,7 +130,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating Repository.php... ");
 
         if(!file_exists($repositoryClass)) {
-            $creation = new Process('touch '.$repositoryClass);
+            $creation = new Process(['touch', $repositoryClass]);
             $creation->run();
             $this->printGreenText("Repository created!");
             $this->printWhiteText("Repository filling with template... ");
@@ -156,7 +156,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating Formatter.php... ");
 
         if(!file_exists($formatterClass)) {
-            $creation = new Process('touch '.$formatterClass);
+            $creation = new Process(['touch', $formatterClass]);
             $creation->run();
             $this->printGreenText("Formatter created!");
             $this->printWhiteText("Formatter filling with template... ");
@@ -182,7 +182,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating Validator.php... ");
 
         if(!file_exists($validatorClass)) {
-            $creation = new Process('touch '.$validatorClass);
+            $creation = new Process(['touch', $validatorClass]);
             $creation->run();
             $this->printGreenText("Validator created!");
             $this->printWhiteText("Validator filling with template... ");
@@ -208,7 +208,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating Service.php... ");
 
         if(!file_exists($serviceClass)) {
-            $creation = new Process('touch '.$serviceClass);
+            $creation = new Process(['touch', $serviceClass]);
             $creation->run();
             $this->printGreenText("Service created!");
             $this->printWhiteText("Service filling with template... ");
@@ -234,7 +234,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating Filter.php... ");
 
         if(!file_exists($filterClass)) {
-            $creation = new Process('touch '.$filterClass);
+            $creation = new Process(['touch', $filterClass]);
             $creation->run();
             $this->printGreenText("Filter created!");
             $this->printWhiteText("Filter filling with template... ");
@@ -260,7 +260,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating FormatterInterface.php... ");
 
         if(!file_exists($formatterInterfaceClass)) {
-            $creation = new Process('touch '.$formatterInterfaceClass);
+            $creation = new Process(['touch', $formatterInterfaceClass]);
             $creation->run();
             $this->printGreenText("FormatterInterface created!");
             $this->printWhiteText("FormatterInterface filling with template... ");
@@ -286,7 +286,7 @@ class GenerateBoilerplate extends Command
         $this->printWhiteText("Creating RepositoryInterface.php... ");
 
         if(!file_exists($repositoryInterfaceClass)) {
-            $creation = new Process('touch '.$repositoryInterfaceClass);
+            $creation = new Process(['touch', $repositoryInterfaceClass]);
             $creation->run();
             $this->printGreenText("RepositoryInterface created!");
             $this->printWhiteText("RepositoryInterface filling with template... ");
@@ -317,7 +317,7 @@ class GenerateBoilerplate extends Command
 
         }
 
-        $creation = new Process('mkdir '.$targetPath);
+        $creation = new Process(['mkdir', $targetPath]);
         $creation->run(); 
 
     }

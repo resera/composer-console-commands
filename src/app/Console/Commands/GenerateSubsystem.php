@@ -92,7 +92,7 @@ class GenerateSubsystem extends Command
 
         }
 
-        $creation = new Process('mkdir '.$targetPath);
+        $creation = new Process(['mkdir', $targetPath]);
         $creation->run(); 
 
     }

@@ -68,7 +68,7 @@ class GenerateFormatter extends Command
         $this->printWhiteText("Creating " .$filename."... ");
 
         if(!file_exists($formatterInterface)) {
-            $creation = new Process('touch '.$formatterInterface);
+            $creation = new Process(['touch', $formatterInterface]);
             $creation->run();
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -92,7 +92,7 @@ class GenerateFormatter extends Command
         $formatter = $this->absPath . 'app/Model/Formatters/'. $subsystemName . '/' . $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($formatter)) {
-            $creation = new Process('touch '.$formatter);
+            $creation = new Process(['touch', $formatter]);
             $creation->run();           
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -117,7 +117,7 @@ class GenerateFormatter extends Command
         $this->formatterProvider = $formatterProvider;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($formatterProvider)) {
-            $creation = new Process('touch '.$formatterProvider);
+            $creation = new Process(['touch', $formatterProvider]);
             $creation->run();             
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");

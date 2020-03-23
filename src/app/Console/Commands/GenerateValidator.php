@@ -71,7 +71,7 @@ class GenerateValidator extends Command
         $this->printWhiteText("Creating " .$filename."... ");
 
         if(!file_exists($validatorInterface)) {
-            $creation = new Process('touch '.$validatorInterface);
+            $creation = new Process(['touch', $validatorInterface]);
             $creation->run();
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -95,7 +95,7 @@ class GenerateValidator extends Command
         $validator = $this->absPath . 'app/Model/Validators/'. $subsystemName . '/' . $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($validator)) {
-            $creation = new Process('touch '.$validator);
+            $creation = new Process(['touch', $validator]);
             $creation->run();           
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -119,7 +119,7 @@ class GenerateValidator extends Command
         $validatorProvider = $this->absPath . 'app/Model/Providers/Validators/'. $subsystemName . '/' . $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($validatorProvider)) {
-            $creation = new Process('touch '.$validatorProvider);
+            $creation = new Process(['touch', $validatorProvider]);
             $creation->run();             
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");

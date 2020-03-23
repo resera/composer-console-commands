@@ -67,7 +67,7 @@ class GenerateFacade extends Command
         $this->printWhiteText("Creating " .$filename."... ");
 
         if(!file_exists($facade)) {
-            $creation = new Process('touch '.$facade);
+            $creation = new Process(['touch', $facade]);
             $creation->run();
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -90,7 +90,7 @@ class GenerateFacade extends Command
         $facade = $this->absPath . 'app/Model/Facades/'. $filename;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($facade)) {
-            $creation = new Process('touch '.$facade);
+            $creation = new Process(['touch', $facade]);
             $creation->run();           
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
@@ -114,7 +114,7 @@ class GenerateFacade extends Command
         $this->facadeProvider = $facadeProvider;
         $this->printWhiteText("Creating " .$filename."... ");
         if(!file_exists($facadeProvider)) {
-            $creation = new Process('touch '.$facadeProvider);
+            $creation = new Process(['touch', $facadeProvider]);
             $creation->run();             
             $this->printGreenText($filename." created!");
             $this->printWhiteText($filename." filling with template... ");
