@@ -69,7 +69,6 @@ class GenerateSubsystem extends Command
         $this->createDir('app/Model/Providers/Formatters/'.$this->argument('name'));
         $this->createDir('app/Model/Providers/Services/'.$this->argument('name'));
         $this->createDir('app/Model/Providers/Validators/'.$this->argument('name'));
-        $this->createDir('app/Model/Providers/ViewComposers/'.$this->argument('name'));
         $this->createDir('app/Http/Controllers/'.$this->argument('name'));
         $this->createDir('app/Http/Middleware/'.$this->argument('name'));
         $this->createDir('resources/views/pages/'.$this->argument('name'));
